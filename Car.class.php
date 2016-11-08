@@ -33,14 +33,29 @@ class Car {
 	}
 	
 	
-	function getAllCars($q) {
+	function getAllCars($q, $sort, $direction) {
+		//mis sort ja järjekord
+		$allowedSortOptions = ["id", "plate", "color"];
+		//kas sort on lubatud valikute sees
+		if(!in_array($sort,$allowedSortOptions)){
+			$sort = "id";
+		} 
+		echo "Sorteerin ...";
+	//TURVALISELT LUBAN 2 VALIKUT
+		$orderBy = "ASC"; //vaikimisi
+		if($direction == "descending"){
+			$orderBy="DESC";
+		}
+		
 		if($q == ""){
 			echo"ei otsi";
 			$stmt = $this->connection->prepare("
 			SELECT id, plate, color
 			FROM cars_and_colors
 			WHERE deleted IS NULL
+			ORDER BY $sort $orderBy
 		");
+		
 		} else {
 		echo "Otsib ...".$q;
 			//Teen otsisõna
@@ -49,7 +64,7 @@ class Car {
 			$stmt = $this->connection->prepare("
 			SELECT id, plate, color
 			FROM cars_and_colors
-			WHERE deleted IS NULL AND (plate LIKE ? OR color LIKE ?)
+			WHERE deleted IS NULL AND (plate LIKE ? OR color LIKE ?)ORDER BY $sort $orderBy
 		");
 			$stmt->bind_param("ss", $searchWord,$searchWord );
 		}
