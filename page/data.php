@@ -58,94 +58,96 @@
 	}
 ?>
 <?php require("../header.php");?>
-<center>
-<h1>Data</h1>
-<?=$msg;?>
-<p>
-	Tere tulemast <a href="user.php"><?=$_SESSION["userEmail"];?>!</a>
-	<a href="?logout=1">Logi välja</a>
-</p>
+<div class="container">
+	<center>
+	<h1>Data</h1>
+	<?=$msg;?>
+	<p>
+		Tere tulemast <a href="user.php"><?=$_SESSION["userEmail"];?>!</a>
+		<a href="?logout=1">Logi välja</a>
+	</p>
 
 
-<h2>Salvesta auto</h2>
-<form method="POST">
-	
-	<label>Auto nr</label><br>
-	<input name="plate" type="text">
-	<br><br>
-	
-	<label>Auto värv</label><br>
-	<input type="color" name="color" >
-	<br><br>
-	
-	<input class="btn btn-success" type="submit" value="Salvesta">
-	
-	
-</form>
+	<h2>Salvesta auto</h2>
+	<form method="POST">
+		
+		<label>Auto nr</label><br>
+		<input name="plate" type="text">
+		<br><br>
+		
+		<label>Auto värv</label><br>
+		<input type="color" name="color" >
+		<br><br>
+		
+		<input class="btn btn-success" type="submit" value="Salvesta">
+		
+		
+	</form>
 
-<h2>Autod</h2>
-<form>
-	<input type="search" name="q" value="<?=$q;?>">
-	<input class="btn btn-success" type="submit" value="Otsi">
-</form>
-<?php 
-	
-	$direction = "ascending";
-	if(isset($_GET["direction"])){
-		if($_GET["direction"] == "ascending"){
-			$direction="descending";
+	<h2>Autod</h2>
+	<form>
+		<input type="search" name="q" value="<?=$q;?>">
+		<input class="btn btn-success" type="submit" value="Otsi">
+	</form>
+	<?php 
+		
+		$direction = "ascending";
+		if(isset($_GET["direction"])){
+			if($_GET["direction"] == "ascending"){
+				$direction="descending";
+				
+			}
 			
 		}
 		
-	}
-	
-	$html = "<table>";
-	
-	$html .= "<tr>";
-		$html .= "<th><a href='?q=".$q."&sort=id&direction=".$direction."'>id</a></th>";
-		$html .= "<th><a href='?q=".$q."&sort=plate&direction=".$direction."'>plate</a></th>";
-		$html .= "<th><a href='?q=".$q."&sort=color&direction=".$direction."'>color</a></th>";
-	$html .= "</tr>";
-	
-	//iga liikme kohta massiivis
-	foreach($carData as $c){
-		// iga auto on $c
-		//echo $c->plate."<br>";
+		$html = "<table class='table table-striped table-bordered'>";
 		
 		$html .= "<tr>";
-			$html .= "<td>".$c->id."</td>";
-			$html .= "<td>".$c->plate."</td>";
-			$html .= "<td style='background-color:".$c->carColor."'>".$c->carColor."</td>";
-			$html .= "<td><a href='edit.php?id=".$c->id."'>edit.php</a></td>";
-			
+			$html .= "<th><a href='?q=".$q."&sort=id&direction=".$direction."'>id</a></th>";
+			$html .= "<th><a href='?q=".$q."&sort=plate&direction=".$direction."'>plate</a></th>";
+			$html .= "<th><a href='?q=".$q."&sort=color&direction=".$direction."'>color</a></th>";
 		$html .= "</tr>";
-	}
-	
-	$html .= "</table>";
-	
-	echo $html;
-	
-	
-	$listHtml = "<br><br>";
-	
-	foreach($carData as $c){
+		
+		//iga liikme kohta massiivis
+		foreach($carData as $c){
+			// iga auto on $c
+			//echo $c->plate."<br>";
+			
+			$html .= "<tr>";
+				$html .= "<td>".$c->id."</td>";
+				$html .= "<td>".$c->plate."</td>";
+				$html .= "<td style='background-color:".$c->carColor."'>".$c->carColor."</td>";
+				$html .= "<td><a class='btn btn-default'> <span class='glyphicon glyphicon-pencil'></span> href='edit.php?id=".$c->id."'>edit.php</a></td>";
+				
+			$html .= "</tr>";
+		}
+		
+		$html .= "</table>";
+		
+		echo $html;
 		
 		
-		$listHtml .= "<h1 style='color:".$c->carColor."'>".$c->plate."</h1>";
-		$listHtml .= "<p>color = ".$c->carColor."</p>";
-	}
-	
-	echo $listHtml;
-	
-	
-	
+		$listHtml = "<br><br>";
+		
+		foreach($carData as $c){
+			
+			
+			$listHtml .= "<h1 style='color:".$c->carColor."'>".$c->plate."</h1>";
+			$listHtml .= "<p>color = ".$c->carColor."</p>";
+		}
+		
+		echo $listHtml;
+		
+		
+		
 
-?>
-</center>
-<br>
-<br>
-<br>
-<br>
-<br>
+	?>
+	</center>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+</div>	
 <?php require ("../footer.php");?>
 
