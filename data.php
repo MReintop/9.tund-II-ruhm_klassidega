@@ -35,15 +35,19 @@
 	  ) {
 		  
 		$Car->saveCar($Helper->cleanInput($_POST["plate"]), $Helper->cleanInput($_POST["color"]));
-		
+		header("Location: data.php");
+		exit();
 	}
 	
-	//saan kõik auto andmed
-	$carData = $Car->getAllCars();
-	//echo "<pre>";
-	//var_dump($carData);
-	//echo "</pre>";
-?>
+	if(isset($_GET["q"])){
+		$q = $Helper->cleanInput($_GET["q"]);
+		$carData = $Car->getAllCars($q);
+	} else {
+		$q="";
+		$carData = $Car->getAllCars($q);
+		
+	}
+?><center>
 <h1>Data</h1>
 <?=$msg;?>
 <p>
@@ -69,6 +73,10 @@
 </form>
 
 <h2>Autod</h2>
+<form>
+	<input type="search" name="q">
+	<input type="submit" value="Otsi">
+</form>
 <?php 
 	
 	$html = "<table>";
@@ -113,7 +121,7 @@
 	
 
 ?>
-
+</center>
 <br>
 <br>
 <br>
