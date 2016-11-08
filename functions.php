@@ -1,10 +1,10 @@
 <?php
 
-	require("../../config.php");
-	require("Interest.class.php");
-	require("Car.class.php");
-	require("User.class.php");
-	require("Helper.class.php");
+	require("../../../config.php");
+	require("../class/Interest.class.php");
+	require("../class/Car.class.php");
+	require("../class/User.class.php");
+	require("../class/Helper.class.php");
 	
 	
 	//ÜHENDUS
@@ -25,39 +25,8 @@
 	// tahan kasutada SESSION muutujat
 	session_start();
 	
-	//***************
-	//**** SIGNUP ***
-	//***************
-	
-	
-	
 	
 	
 
-	
-	
-	
-	
-	
-	
-	/*function sum($x, $y) {
-		
-		return $x + $y;
-		
-	}
-	
-	
-	function hello($firsname, $lastname) {
-		
-		return "Tere tulemast ".$firsname." ".$lastname."!";
-		
-	}
-	
-	echo sum(5123123,123123123);
-	echo "<br>";
-	echo hello("Romil", "Robtsenkov");
-	echo "<br>";
-	echo hello("Juku", "Juurikas");
-	*/
 
 ?>
